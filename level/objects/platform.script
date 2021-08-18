@@ -1,21 +1,20 @@
+local function animate_platforms(self)
+	local pos = go.get_position(".")
+	local endx = 500
+	go.animate(".", "position.x", go.PLAYBACK_ONCE_FORWARD, -endx, go.EASING_LINEAR, (endx + pos.x) / (self.speed * 60), 0,
+	function(self) msg.post("/level/controller#script", "delete_spawn", { id = go.get_id() }) end)
+end
+
 function init(self)
 	self.speed = 9		-- Default speed
 	self.coins = {}
+	animate_platforms(self)
 end
 
 function final(self)
 	for i,p in ipairs(self.coins) do
 	    go.delete(p)
     end
-end
-
-function update(self, dt)
-	local pos = go.get_position(p)
-	if pos.x < -500 then
-		msg.post("/level/controller#script", "delete_spawn", { id = go.get_id() })
-	end
-	pos.x = pos.x - self.speed
-	go.set_position(pos, p)
 end
 
 function create_coins(self, params)
@@ -33,6 +32,7 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("set_speed") then
 		self.speed = message.speed
+		animate_platforms(self)
 	elseif message_id == hash("create_coins") then
 		create_coins(self, message)
 	end
