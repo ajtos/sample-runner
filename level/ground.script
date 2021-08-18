@@ -1,22 +1,16 @@
-local pieces = { "ground0", "ground1", "ground2", "ground3", "ground4", "ground5", "ground6" }
+local function animate_ground(self)
+	local pos = go.get_position("ground")
+	go.animate("ground", "position.x", go.PLAYBACK_LOOP_FORWARD, pos.x - 456, go.EASING_LINEAR, 456 / (self.speed * 60))
+end
 
 function init(self)
 	self.speed = 6
-end
-
-function update(self, dt)
-	for i, p in ipairs(pieces) do
-		local pos = go.get_position(p)
-		if pos.x <= -228 then
-			pos.x = 1368 + (pos.x + 228)
-		end
-		pos.x = pos.x - self.speed
-		go.set_position(pos, p)
-	end
+	animate_ground(self)
 end
 
 function on_message(self, message_id, message, sender)
 	if message_id == hash("set_speed") then
 		self.speed = message.speed
+		animate_ground(self)
 	end
 end
