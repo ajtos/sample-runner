@@ -1,15 +1,23 @@
 images {
   image: "/def-runner/level_images/bg.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
   image: "/def-runner/level_images/earthlike_planet.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
   image: "/def-runner/level_images/gas_planet.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
   image: "/def-runner/level_images/ice_planet.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
 images {
   image: "/def-runner/level_images/ring_planet.png"
+  sprite_trim_mode: SPRITE_TRIM_MODE_OFF
 }
+margin: 0
+extrude_borders: 4
+inner_padding: 0
